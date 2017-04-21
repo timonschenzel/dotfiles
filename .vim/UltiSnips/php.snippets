@@ -1,0 +1,68 @@
+snippet if
+if (${1}) {
+	${2}
+}
+endsnippet
+
+snippet foreach
+foreach (\$${1:variable} as \$${2:key}${3: => \$value}) {
+	${4}
+}
+endsnippet
+
+snippet met
+public function ${1}(${2})
+{
+	${3}
+}
+endsnippet
+
+snippet pmet
+protected function ${1}(${2})
+{
+	${3}
+}
+endsnippet
+
+snippet smet
+static function ${1}(${2})
+{
+	${3}
+}
+endsnippet
+
+snippet db
+dd('hit');
+endsnippet
+
+snippet wow
+`!p snip.rv = snip.basename`
+endsnippet
+
+snippet stest
+<?php
+
+class `!p snip.rv = snip.basename` extends ${2:PHPUnit_TestCase}
+{
+	${3:use PHPUnit_DatabaseTransactions;}
+
+	/** @test */
+	function it_${4}()
+	{
+		${5}
+	}
+}
+
+endsnippet
+
+snippet atest
+/** @test */
+public function it_${1}()
+{
+	${2}
+}
+endsnippet
+
+snippet $
+$this->${1}
+endsnippet
