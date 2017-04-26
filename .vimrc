@@ -36,7 +36,11 @@ set guioptions-=L
 set guioptions-=r
 set guioptions-=R
 
+" PHP
 let php_htmlInStrings = 1
+let php_sql_query = 1
+let php_baselib = 1
+let php_folding = 1
 
 hi LineNr guibg=bg                                              "Line number color the same as the background color.
 "set cursorline                                                  "Highlight the current line.
