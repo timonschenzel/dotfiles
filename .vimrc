@@ -8,6 +8,9 @@ set laststatus=2
 
 "set shellcmdflag=-ic                                            "To make Vim’s :! shell behave like your command prompt
 
+let g:indentLine_setColors = 0
+let g:indentLine_color_term = 239
+
 syntax enable                                                   "Enable syntax highlighting.
 
 set backspace=indent,eol,start                                  "Backspace action: indent, insert new line, and start it
@@ -15,7 +18,7 @@ let mapleader = ','                                             "The leader key.
 
 "-----------Visuals----------"
 let g:enable_bold_font = 1
-colorscheme dracula                                            "Set the theme.
+colorscheme facebook                                            "Set the theme.
 set t_CO=256                                                    "Use 256 colors. This is useful for Terminal Vim.
 "set background=dark
 set guifont=Operator\ Mono:h15                                  "Set the default font family and size.
@@ -45,6 +48,10 @@ set tabstop=4                                                   "Tab width.
 set softtabstop=4                                               "On pressing tab, insert 4 spaces in insert mode.
 set shiftwidth=4                                                "On pressing tab, insert 4 spaces in normal mode.
 set expandtab                                                   "When indenting with '>', use 4 spaces width.
+
+" Insert new lines
+nmap oo o<Esc>
+nmap OO O<Esc>
 
 "-----------Search----------"
 set hlsearch
@@ -116,7 +123,7 @@ nmap <Leader>wr :%s/<C-r><C-w>/
 "Testing
 map <Leader>t :TestNearest<cr>
 map <Leader>tt :TestFile<cr>
-map <Leader>ta :exe "! cd /Applications/MAMP/htdocs/test.pinkcubeshops.nl && phpunit --colors=never --testsuite unit --exclude-group validator"<cr>
+map <Leader>ta :exe "! cd /Applications/MAMP/htdocs/test.pinkcubeshops.nl && phpunit --testsuite unit --exclude-group validator"<cr>
 "com Testall :exe "! cd /Applications/MAMP/htdocs/test.pinkcubeshops.nl && phpunit --colors=never --testsuite unit --exclude-group validator"<cr>
 
 "-----------Plugins----------"

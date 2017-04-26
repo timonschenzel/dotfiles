@@ -32,6 +32,7 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'mhinz/vim-signify'
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'yggdroot/indentline'
 
 "All of your Plugins must be added before the following line.
 call vundle#end()            "Required.

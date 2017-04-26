@@ -47,7 +47,7 @@ class `!p snip.rv = snip.basename` extends ${2:PHPUnit_TestCase}
 	${3:use PHPUnit_DatabaseTransactions;}
 
 	/** @test */
-	function it_${4}()
+	public function it_${4}()
 	{
 		${5}
 	}
@@ -65,4 +65,38 @@ endsnippet
 
 snippet $
 $this->${1}
+endsnippet
+
+snippet cclass
+<?php
+
+class `!p snip.rv = snip.basename.title()` extends CI_Controller
+{
+	public function __construct(${1})
+	{
+		parent::__construct();
+		${2}
+	}
+
+	${3}
+}
+
+endsnippet
+
+snippet aclass
+<?php
+
+require_once(APPPATH . 'controllers/core/adminmodulepage.php');
+
+class `!p snip.rv = snip.basename.title()` extends AdminModulePage
+{
+	public function __construct(${1})
+	{
+		parent::__construct();
+		${2}
+	}
+
+	${3}
+}
+
 endsnippet
