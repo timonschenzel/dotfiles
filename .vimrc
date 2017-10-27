@@ -4,6 +4,14 @@ set noswapfile
 
 so ~/.vim/plugins.vim
 
+"Duplicate file
+nmap <Leader>df :Dupl 
+command! -nargs=1 Dupl call Dupl(<f-args>)
+function! Dupl(newName)
+    let path = expand('%:p:h') . '/' . a:newName
+    execute 'saveas ' . path
+endfunction
+
 set laststatus=2
 
 "set shellcmdflag=-ic                                            "To make Vim’s :! shell behave like your command prompt
@@ -16,9 +24,21 @@ syntax enable                                                   "Enable syntax h
 set backspace=indent,eol,start                                  "Backspace action: indent, insert new line, and start it
 let mapleader = ','                                             "The leader key.
 
+"-----------Move lines----------"
+nnoremap <Leader>/ :m .+1<CR>==
+nnoremap <Leader>. :m .-2<CR>==
+
+inoremap <Leader>/ <Esc>:m .+1<CR>==gi
+vnoremap <Leader>. :m '>+1<CR>gv=gv
+vnoremap <Leader>/ :m '<-2<CR>gv=gv
+inoremap <Leader>/ <Esc>:m .-2<CR>==gi
+
 "-----------Visuals----------"
 let g:enable_bold_font = 1
 colorscheme facebook                                            "Set the theme.
+if &diff
+    colorscheme dracula
+endif
 set t_CO=256                                                    "Use 256 colors. This is useful for Terminal Vim.
 "set background=dark
 set guifont=Operator\ Mono:h15                                  "Set the default font family and size.
@@ -40,7 +60,7 @@ set guioptions-=R
 let php_htmlInStrings = 1
 let php_sql_query = 1
 let php_baselib = 1
-let php_folding = 1
+"let php_folding = 1
 
 hi LineNr guibg=bg                                              "Line number color the same as the background color.
 "set cursorline                                                  "Highlight the current line.
@@ -52,10 +72,6 @@ set tabstop=4                                                   "Tab width.
 set softtabstop=4                                               "On pressing tab, insert 4 spaces in insert mode.
 set shiftwidth=4                                                "On pressing tab, insert 4 spaces in normal mode.
 set expandtab                                                   "When indenting with '>', use 4 spaces width.
-
-" Insert new lines
-nmap oo o<Esc>
-nmap OO O<Esc>
 
 "-----------Search----------"
 set hlsearch
@@ -90,7 +106,7 @@ nmap <D-1> :NERDTreeToggle<cr>                                  "Toggle the NERD
 nmap <Leader>cd :cd %:p:h<cr>:pwd<cr>                           "Easy set the current working directory to the current present working directory.
 "Tip: run ctags -R to regenerated the index.
 "'\v[\/](node_modules|target|dist|admin_ci/public|admin_ci/_recources|var)|(\.(swp|ico|git|svn))$
-"ctags -R --exclude=node_modules --exclude=target --exclude=dist --exclude=admin_ci/public --exclude=admin_ci/_recources --exclude=var --exclude=vendor --exclude=.git --exclude=.svn
+"ctags -R --exclude=node_modules --exclude=target --exclude=dist --exclude=admin_ci/public --exclude=admin_ci/_recources --exclude=var --exclude=vendor --exclude=.git --exclude=.svn --exclude=.git
 "Quickly browse to any tag/symbol in the project.
 nmap <Leader>f :tag<space>
 nmap <F9> :exe "tag " . expand("<cword>")<cr>
@@ -127,7 +143,7 @@ nmap <Leader>wr :%s/<C-r><C-w>/
 "Testing
 map <Leader>t :TestNearest<cr>
 map <Leader>tt :TestFile<cr>
-map <Leader>ta :exe "! cd /Applications/MAMP/htdocs/test.pinkcubeshops.nl && phpunit --testsuite unit --exclude-group validator"<cr>
+map <Leader>ta :exe "! cd /Applications/MAMP/htdocs/test.pinkcubeshops.nl && vendor/bin/phpunit --testsuite unit --exclude-group validator"<cr>
 "com Testall :exe "! cd /Applications/MAMP/htdocs/test.pinkcubeshops.nl && phpunit --colors=never --testsuite unit --exclude-group validator"<cr>
 
 "-----------Plugins----------"
