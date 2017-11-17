@@ -17,29 +17,38 @@ set laststatus=2
 "set shellcmdflag=-ic                                            "To make Vim’s :! shell behave like your command prompt
 
 let g:indentLine_setColors = 0
+let g:indentLine_char = '|'
 let g:indentLine_color_term = 239
+"let g:indentLine_setConceal = 0
+let g:indentLine_bgcolor_term = 0
 
 syntax enable                                                   "Enable syntax highlighting.
+
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+
+" File specific settings
+autocmd Filetype python setlocal noexpandtab tabstop=4 shiftwidth=4 " use tabs for Pyton (overwrite system settings)
+autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
+autocmd FileType php,blade autocmd BufWritePre <buffer> %s/\s\+$//e " remove whitespaces in PHP
+autocmd Filetype php,blade autocmd BufWritePre <buffer> :%retab
 
 set backspace=indent,eol,start                                  "Backspace action: indent, insert new line, and start it
 let mapleader = ','                                             "The leader key.
 
 "-----------Move lines----------"
-nnoremap <Leader>/ :m .+1<CR>==
-nnoremap <Leader>. :m .-2<CR>==
-
-inoremap <Leader>/ <Esc>:m .+1<CR>==gi
-vnoremap <Leader>. :m '>+1<CR>gv=gv
-vnoremap <Leader>/ :m '<-2<CR>gv=gv
-inoremap <Leader>/ <Esc>:m .-2<CR>==gi
+nnoremap <S-j> :m .+1<CR>==
+nnoremap <S-k> :m .-2<CR>==
+vnoremap <S-j> :m '>+1<CR>gv=gv
+vnoremap <S-k> :m '<-2<CR>gv=gv
 
 "-----------Visuals----------"
 let g:enable_bold_font = 1
-colorscheme facebook                                            "Set the theme.
-if &diff
-    colorscheme dracula
-endif
-set t_CO=256                                                    "Use 256 colors. This is useful for Terminal Vim.
+set t_Co=256
+colorscheme slime                                            "Set the theme.
+"hi String ctermfg=14
 "set background=dark
 set guifont=Operator\ Mono:h15                                  "Set the default font family and size.
 "set macligatures                                                "Show pretty symbols, when available.
@@ -74,8 +83,8 @@ set shiftwidth=4                                                "On pressing tab
 set expandtab                                                   "When indenting with '>', use 4 spaces width.
 
 "-----------Search----------"
-set hlsearch
-set incsearch
+"set hlsearch
+"set incsearch
 
 "-----------Split Management----------"
 set splitbelow
@@ -101,12 +110,15 @@ nmap <Leader>e :e .<cr>                                         "Make it easy to
 
 nmap <Leader>sr :call ReloadAllSnippets()<cr>                   "Easy reload snippets.
 
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
 nmap <leader><space> :nohlsearch<cr>                            "Remove highlichting.
 nmap <D-1> :NERDTreeToggle<cr>                                  "Toggle the NERD Tree sidebar.
 nmap <Leader>cd :cd %:p:h<cr>:pwd<cr>                           "Easy set the current working directory to the current present working directory.
 "Tip: run ctags -R to regenerated the index.
 "'\v[\/](node_modules|target|dist|admin_ci/public|admin_ci/_recources|var)|(\.(swp|ico|git|svn))$
-"ctags -R --exclude=node_modules --exclude=target --exclude=dist --exclude=admin_ci/public --exclude=admin_ci/_recources --exclude=var --exclude=vendor --exclude=.git --exclude=.svn --exclude=.git
+"ctags -R --languages=PHP --exclude=node_modules --exclude=target --exclude=dist --exclude=admin_ci/public --exclude=admin_ci/_recources --exclude=var --exclude=vendor --exclude=.git --exclude=.svn --exclude=.js --exclude=.min.js
 "Quickly browse to any tag/symbol in the project.
 nmap <Leader>f :tag<space>
 nmap <F9> :exe "tag " . expand("<cword>")<cr>
@@ -174,6 +186,13 @@ let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist|admin_ci/public|adm
 let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:30,results:30'
 let g:ctrlp_max_files = 100000
 let g:ctrlp_buftag_types = { 'javascript': '--language-force=javascript --javascript-types=fcmv' }
+let g:ctrlp_map = ''
+
+"/
+"/ GitGutter
+"/
+nmap <Leader>] <Plug>GitGutterNextHunk
+nmap <Leader>[ <Plug>GitGutterPrevHunk
 
 "/
 "/ Command-T
@@ -191,7 +210,8 @@ if &term =~ "xterm" || &term =~ "screen"
     let g:CommandTSelectPrevMap = ['<C-k>', '<ESC>OA']
 endif
 
-let g:CommandTWildIgnore=&wildignore . ',.DS_Store,/node_modules,/admin_ci/public'
+let g:CommandTHighlightColor="CommandT"
+let g:CommandTWildIgnore=&wildignore . ',.DS_Store,*/node_modules/*,*/vendor/*,/admin_ci/public'
 let g:CommandTMaxFiles=500000
 
 nmap <C-p> :CommandT<cr>
@@ -218,6 +238,10 @@ endfunction
 "/ NERDTree
 "/
 let NERDTreeHijackNetrw = 0
+let NERDTreeQuitOnOpen = 1
+let NERDTreeMinimalUI = 1
+let NERDTreeShowHidden = 1
+let NERDTreeShowLineNumbers= 1
 
 "/
 "/ Greplace.vim
@@ -230,7 +254,7 @@ let g:ag_prg = 'ag -S --nocolor --nogroup --column --ignore node_modules --ignor
 "/
 "/ vim-php-cs-fixer.vim
 "/
-let g:php_cs_fixer_lever = 'psr2'
+"let g:php_cs_fixer_lever = 'psr2'
 nmap <Leader>b :call PhpCsFixerFixFile()<cr>
 
 "/
@@ -243,6 +267,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_php_checkers = ['php']
 
 "/
 "/ tobyS/pdv
@@ -291,6 +316,15 @@ autocmd FileType php noremap <Leader>nf :call PhpExpandClass()<CR>
 "Sort PHP use statements
 "http://stackoverflow.com/questions/11531073/how-do-you-sort-a-range-of-lines-by-length
 vmap <Leader>su ! awk '{ print length(), $0 \| "sort -n \| cut -d\\  -f2-" }'<cr>
+
+" Show syntax highlighting groups for word under cursor
+nmap <C-S-P> :call <SID>SynStack()<CR>
+function! <SID>SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
 
 "-----------Tips and Reminders----------"
 " o                         Insert new line under the cursor

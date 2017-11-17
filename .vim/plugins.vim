@@ -4,19 +4,22 @@ filetype off "Required.
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-Plugin 'vundlevim/vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'haya14busa/incsearch.vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'shawncplus/phpcomplete.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-vinegar'
 Plugin 'scrooloose/nerdtree'
-Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'rking/ag.vim'
 Plugin 'skwp/greplace.vim'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
-Plugin 'tpope/vim-surround'
+Plugin 'airblade/vim-gitgutter'
 Plugin 'StanAngeloff/php.vim'
 Plugin 'arnaud-lb/vim-php-namespace'
 Plugin 'ervandew/supertab'
-Plugin 'stephpy/vim-php-cs-fixer'
 Plugin 'tobyS/vmustache'
 Plugin 'tobyS/pdv'
 Plugin 'sirver/ultisnips'
@@ -28,10 +31,10 @@ Plugin 'janko-m/vim-test'
 Plugin 'dracula/vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'mhinz/vim-signify'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'yggdroot/indentline'
+Plugin 'Yggdroot/indentLine'
 Plugin 'daylerees/colour-schemes', { 'rtp': 'vim/' }
+Plugin 'noahfrederick/vim-noctu'
 
 "All of your Plugins must be added before the following line.
 call vundle#end()            "Required.
