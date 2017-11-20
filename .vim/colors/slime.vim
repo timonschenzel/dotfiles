@@ -16,7 +16,12 @@ hi phpType ctermfg=9 ctermbg=NONE cterm=NONE guifg=NONE gui=NONE
 hi link phpDocTags phpType
 hi link phpClass phpType
 hi link phpUseClass phpType
+hi link phpMemberSelector phpType
 hi link phpRegion phpType
+hi phpMethod ctermfg=14 ctermbg=NONE cterm=NONE guifg=NONE gui=NONE
+hi link phpIdentifier phpMethod
+hi link phpVarSelector phpMethod
+hi link phpMethodsVar phpMethod
 hi phpKeyword ctermfg=12 ctermbg=NONE cterm=NONE guifg=NONE gui=NONE
 hi link phpParent phpKeyword
 hi link Delimiter phpKeyword
@@ -36,7 +41,7 @@ hi LineNr ctermfg=59 ctermbg=NONE cterm=NONE guifg=#4f5a63 guibg=NONE
 hi VertSplit ctermfg=0 ctermbg=0 cterm=NONE guifg=#676a6c guibg=#676a6c gui=NONE
 hi MatchParen ctermfg=145 ctermbg=NONE cterm=underline guifg=#9fb3c2 guibg=NONE gui=underline
 hi StatusLine ctermfg=15 ctermbg=59 cterm=bold guifg=#ffffff guibg=#676a6c gui=bold
-hi StatusLineNC ctermfg=15 ctermbg=59 cterm=NONE guifg=#ffffff guibg=#676a6c gui=NONE
+hi StatusLineNC ctermfg=15 ctermbg=0 cterm=NONE guifg=#ffffff guibg=#676a6c gui=NONE
 hi Pmenu ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
 hi PmenuSel ctermfg=NONE ctermbg=179 cterm=NONE guifg=NONE guibg=#c7af3f gui=NONE
 hi IncSearch ctermfg=17 ctermbg=230 cterm=NONE guifg=#292d30 guibg=#faffdb gui=NONE

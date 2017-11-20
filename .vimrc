@@ -16,12 +16,6 @@ set laststatus=2
 
 "set shellcmdflag=-ic                                            "To make Vim’s :! shell behave like your command prompt
 
-let g:indentLine_setColors = 0
-let g:indentLine_char = '|'
-let g:indentLine_color_term = 239
-"let g:indentLine_setConceal = 0
-let g:indentLine_bgcolor_term = 0
-
 syntax enable                                                   "Enable syntax highlighting.
 
 noremap <Up> <NOP>
@@ -65,15 +59,18 @@ set guioptions-=L
 set guioptions-=r
 set guioptions-=R
 
+" indentLine
+let g:indentLine_char = '⎸'
+
 " PHP
 let php_htmlInStrings = 1
 let php_sql_query = 1
 let php_baselib = 1
 "let php_folding = 1
 
-hi LineNr guibg=bg                                              "Line number color the same as the background color.
+"hi LineNr guibg=bg                                              "Line number color the same as the background color.
 "set cursorline                                                  "Highlight the current line.
-hi vertsplit guifg=#2d3449 guibg=#2d3449                        "Style the split borders.
+"hi vertsplit guifg=#2d3449 guibg=#2d3449                        "Style the split borders.
 
 "Indent
 filetype plugin indent on                                       "Show existing tab with 4 spaces width.
