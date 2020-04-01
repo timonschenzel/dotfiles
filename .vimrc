@@ -4,6 +4,8 @@ set noswapfile
 
 so ~/.vim/plugins.vim
 
+autocmd BufWritePost * GitGutter
+
 "Duplicate file
 nmap <Leader>df :Dupl 
 command! -nargs=1 Dupl call Dupl(<f-args>)
@@ -14,13 +16,30 @@ endfunction
 
 set laststatus=2
 
+set nowrap
+
+set re=1
+
+
 "set shellcmdflag=-ic                                            "To make Vim’s :! shell behave like your command prompt
 
 syntax enable                                                   "Enable syntax highlighting.
+imap jj <Esc>
+
+let mapleader = ','                                             "The leader key.
+
+map <Leader>l :NERDTreeFind<CR>
+
+map <leader>p "+p
+map <leader>y "+y
+map <leader>d "+d
+map <leader>Y "+Y
+map <leader>P "+P
+map <leader>D "+D
 
 noremap <Up> <NOP>
 noremap <Down> <NOP>
-noremap <Left> <NOP>
+noremap <Lesy escaping to normal model.ft> <NOP>
 noremap <Right> <NOP>
 
 " File specific settings
@@ -30,13 +49,12 @@ autocmd FileType php,blade autocmd BufWritePre <buffer> %s/\s\+$//e " remove whi
 autocmd Filetype php,blade autocmd BufWritePre <buffer> :%retab
 
 set backspace=indent,eol,start                                  "Backspace action: indent, insert new line, and start it
-let mapleader = ','                                             "The leader key.
 
 "-----------Move lines----------"
-nnoremap <S-j> :m .+1<CR>==
-nnoremap <S-k> :m .-2<CR>==
-vnoremap <S-j> :m '>+1<CR>gv=gv
-vnoremap <S-k> :m '<-2<CR>gv=gv
+" nnoremap <S-j> :m .+1<CR>==
+" nnoremap <S-k> :m .-2<CR>==
+" vnoremap <S-j> :m '>+1<CR>gv=gv
+" vnoremap <S-k> :m '<-2<CR>gv=gv
 
 "-----------Visuals----------"
 let g:enable_bold_font = 1
@@ -94,8 +112,6 @@ nmap <C-H> <C-W><C-H>
 nmap <C-L> <C-W><C-L>
 
 "-----------Mappings----------"
-imap ;; <C-C>                                                   "Easy escaping to normal model.
-imap jj <C-C>                                                   "Easy escaping to normal model.
 "Easy way to edit the .vimrc file.
 nmap <Leader>ve :e $MYVIMRC<cr>
 "Make it easy to edit a snippet.
@@ -127,34 +143,30 @@ nmap <Leader>[ :bp<cr>
 
 "-----------Pinkcubeshops (Inge 2.0 and webshop specific)----------
 nmap <Leader>ps :cd ~/../../Applications/MAMP/htdocs/test.pinkcubeshops.nl<cr>:tabedit .<cr>
-nmap <C>PI :CommandT admin_ci/<cr>
-nmap <C-P><C-M> :CommandT app/<cr>
-"Inge 2.0"
-nmap <C-A-i> :CommandT admin_ci/<cr>
-"Controllers"
-nmap <Leader><Leader>c :CommandT<cr>_ci/a/controllers/
-nmap <Leader><Leader>ca :CommandT<cr>_/a/controllers/admin/
-nmap <Leader><Leader>cc :CommandT<cr>_/a/controllers/customers/
-nmap <Leader><Leader>cs :CommandT<cr>_/a/controllers/suppliers/
-"Views"
-nmap <Leader><Leader>v :CommandT<cr>_/a/views/
-nmap <Leader><Leader>va :CommandT<cr>_/a/views/admin/
-nmap <Leader><Leader>vc :CommandT<cr>_/a/views/customers/
-nmap <Leader><Leader>vs :CommandT<cr>_/a/views/suppliers/
-"Magento"
-nmap <C-A-m> :CommandT app/<cr>
 
 "Replace"
 vmap <Leader>r :s/
 nmap <Leader>r :%s/
 nmap <Leader>wr :%s/<C-r><C-w>/
 
-"Testing
+"Run phpunit tests inside homestead
+let test#php#phpunit#executable = 'TERM=xterm-256color ssh -t vagrant@192.168.10.10 "cd /home/vagrant/projects/pinkcubeshops; vendor/bin/phpunit"'
+
 map <Leader>t :TestNearest<cr>
 map <Leader>tt :TestFile<cr>
 map <Leader>ta :exe "! cd /Applications/MAMP/htdocs/test.pinkcubeshops.nl && vendor/bin/phpunit --testsuite unit --exclude-group validator"<cr>
-"com Testall :exe "! cd /Applications/MAMP/htdocs/test.pinkcubeshops.nl && phpunit --colors=never --testsuite unit --exclude-group validator"<cr>
 
+"Run Startify for each new tab
+if has('nvim')
+    autocmd TabNewEntered * Startify
+else
+    autocmd VimEnter * let t:startify_new_tab = 1
+    autocmd BufEnter *
+                \ if !exists('t:startify_new_tab') && empty(expand('%')) |
+                \   let t:startify_new_tab = 1 |
+                \   Startify |
+                \ endif
+endif
 "-----------Plugins----------"
 "/
 "/ NERD Comment
@@ -174,6 +186,7 @@ let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
 let g:NERDCommentEmptyLines = 1
 " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
+
 "/
 "/ CtrlP
 "/
@@ -188,39 +201,23 @@ let g:ctrlp_map = ''
 "/
 "/ GitGutter
 "/
+nmap <Leader>= <Plug>GitGutterPreviewHunk
 nmap <Leader>] <Plug>GitGutterNextHunk
 nmap <Leader>[ <Plug>GitGutterPrevHunk
 
 "/
-"/ Command-T
-"/
-set ttimeoutlen=50
-
-if &term =~ "xterm" || &term =~ "screen"
-    " as of March 2013, with current iTerm (1.0.0.20130319), tmux (1.8)
-    " and Vim (7.3, with patches 1-843), this is all I need:
-    let g:CommandTCancelMap     = ['<ESC>', '<C-c>']
-
-    " when I originally started using Command-T inside a terminal,
-    " I used to need these as well:
-    let g:CommandTSelectNextMap = ['<C-j>', '<ESC>OB']
-    let g:CommandTSelectPrevMap = ['<C-k>', '<ESC>OA']
+" mileszs/ack.vim
+if executable('ag')
+    let g:ackprg = 'ag -S --nogroup --column --ignore node_modules --ignore "./public/*" --ignore "./admin_ci/public/*" --ignore "./vendor/*" --ignore tags --ignore "./includes/src" --ignore "./media/*" --vimgrep'
 endif
 
-let g:CommandTHighlightColor="CommandT"
-let g:CommandTWildIgnore=&wildignore . ',.DS_Store,*/node_modules/*,*/vendor/*,/admin_ci/public'
-let g:CommandTMaxFiles=500000
-
-nmap <C-p> :CommandT<cr>
-nmap <C-t> :CommandT<cr>
-nmap <C-r> :CtrlPBufTag<cr>
-"Go directly to the method using F10 key
-map <F10> :CtrlPBufTag<cr><c-\>w<cr>
-nmap <C-e> :CommandTMRU<cr>
-nmap <C-tf> :CommandTFlush<cr>
-"nmap <D-e> :CtrlPMRUFiles<cr>
-let g:CommandTMatchWindowReverse = 0
-let g:CommandTMatchWindowAtTop = 0
+" junegunn/fzf.vim
+map <C-p> :FZF<cr>
+map <C-e> :Buffers<cr>
+map <C-t> :Tags<cr>
+map <C-l> :call fzf#vim#buffer_tags('', { 'options': ['--nth', '..-2,-1','--query', '^f$ '] })<cr>
+let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+" map <C-l> :BTags<cr>
 
 function! TestingVar()
     CtrlPBufTag
@@ -243,28 +240,15 @@ let NERDTreeShowLineNumbers= 1
 "/
 "/ Greplace.vim
 "/
-set grepprg=ag                                                  "We want to use Ag for the search.
-let g:grep_cmd_opts = '--line-numbers --noheading'
-let g:ag_prg = 'ag -S --nocolor --nogroup --column --ignore node_modules --ignore ./public/* --ignore tags'
+" mileszs/ack.vim
+if executable('ag')
+    let g:ackprg = 'ag -S --nogroup --column --ignore node_modules --ignore "./public/*" --ignore "./vendor/*" --ignore tags --vimgrep'
+endif
+
+" set grepprg=ag                                                  "We want to use Ag for the search.
+" let g:grep_cmd_opts = '--line-numbers --noheading'
+" let g:ag_prg = 'ag -S --nocolor --nogroup --column --ignore node_modules --ignore ./public/* --ignore tags'
 "let g:ag_prg = 'ag -S --nocolor --nogroup --column --ignore "./public/*" --ignore tags'
-
-"/
-"/ vim-php-cs-fixer.vim
-"/
-"let g:php_cs_fixer_lever = 'psr2'
-nmap <Leader>b :call PhpCsFixerFixFile()<cr>
-
-"/
-"/ Syntastic
-"/
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_php_checkers = ['php']
 
 "/
 "/ tobyS/pdv
@@ -287,6 +271,12 @@ let g:vim_php_refactoring_default_method_visibility = 'protected'
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+"/
+"/ mhinz/vim-startify
+"/ Startify
+"/
+let g:startify_change_to_vcs_root = 1
 
 "-----------Auto-Commands----------"
 "Automatically source the Vimrc file on save.
@@ -315,13 +305,20 @@ autocmd FileType php noremap <Leader>nf :call PhpExpandClass()<CR>
 vmap <Leader>su ! awk '{ print length(), $0 \| "sort -n \| cut -d\\  -f2-" }'<cr>
 
 " Show syntax highlighting groups for word under cursor
-nmap <C-S-P> :call <SID>SynStack()<CR>
+nmap <C-X> :call <SID>SynStack()<CR>
 function! <SID>SynStack()
   if !exists("*synstack")
     return
   endif
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
+
+function! IPhpInsertUse()
+    call PhpInsertUse()
+    call feedkeys('a',  'n')
+endfunction
+autocmd FileType php inoremap <Leader>u <Esc>:call IPhpInsertUse()<CR>
+autocmd FileType php noremap <Leader>u :call PhpInsertUse()<CR>
 
 "-----------Tips and Reminders----------"
 " o                         Insert new line under the cursor

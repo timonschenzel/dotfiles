@@ -1,10 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =8
-let g:netrw_dirhist_1='/Users/Timon/Projects/pinkcubeshops'
-let g:netrw_dirhist_2='/Applications/MAMP/htdocs/test.pinkcubeshops.nl'
-let g:netrw_dirhist_3='/Users/Timon/Projects/pinkcubeshops'
-let g:netrw_dirhist_4='/Users/Timon/Projects'
-let g:netrw_dirhist_5='/Users/Timon/Projects/pinkcubeshops'
-let g:netrw_dirhist_6='/Users/Timon/Projects/pinkcubeshops/lib'
-let g:netrw_dirhist_7='/Applications/MAMP/htdocs/test.pinkcubeshops.nl'
-let g:netrw_dirhist_8='/Users/Timon/Projects/pinkcubeshops'
+let g:netrw_dirhistcnt =6
+let g:netrw_dirhist_6='/Users/Timon/Projects/connectors/node_modules'
+let g:netrw_dirhist_5='/Users/Timon/Projects/connectors'
+let g:netrw_dirhist_4='/Users/Timon/Projects/connectors/app/Http/Livewire'
+let g:netrw_dirhist_3='/Users/Timon/Projects/pinkcubeshops/tests/Unit/app/Components/Finance/ExactOnline'
+let g:netrw_dirhist_2='/Users/Timon/Projects/pinkcubeshops'
+let g:netrw_dirhist_1='/Users/Timon/Projects/akeneo-pim'

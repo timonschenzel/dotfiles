@@ -10,6 +10,11 @@ endif
 
 let g:colors_name = "Slime"
 
+" Tabs
+hi TabLineFill ctermfg=0 ctermbg=0
+hi TabLine ctermfg=3 ctermbg=0
+hi TabLineSel ctermfg=3 ctermbg=0
+
 " PHP
 hi phpFunction ctermfg=179 ctermbg=NONE cterm=NONE guifg=NONE gui=NONE
 hi phpType ctermfg=9 ctermbg=NONE cterm=NONE guifg=NONE gui=NONE
@@ -22,9 +27,11 @@ hi phpMethod ctermfg=14 ctermbg=NONE cterm=NONE guifg=NONE gui=NONE
 hi link phpIdentifier phpMethod
 hi link phpVarSelector phpMethod
 hi link phpMethodsVar phpMethod
+hi link phpDocIdentifier phpMethod
 hi phpKeyword ctermfg=12 ctermbg=NONE cterm=NONE guifg=NONE gui=NONE
 hi link phpParent phpKeyword
 hi link Delimiter phpKeyword
+hi link phpDocParam phpKeyword
 hi link phpInclude phpKeyword
 
 " Command-T
