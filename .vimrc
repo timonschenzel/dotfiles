@@ -208,7 +208,7 @@ nmap <Leader>[ <Plug>GitGutterPrevHunk
 "/
 " mileszs/ack.vim
 if executable('ag')
-    let g:ackprg = 'ag -S --nogroup --column --ignore node_modules --ignore "./public/*" --ignore "./admin_ci/public/*" --ignore "./vendor/*" --ignore tags --ignore "./includes/src" --ignore "./media/*" --vimgrep'
+    let g:ackprg = 'ag -S --nogroup --column --ignore node_modules --ignore "/public/*" --ignore "/admin_ci/public/*" --ignore "vendor/*" --ignore tags --ignore "includes/src" --ignore "media/*" --vimgrep'
 endif
 
 " junegunn/fzf.vim
@@ -242,7 +242,7 @@ let NERDTreeShowLineNumbers= 1
 "/
 " mileszs/ack.vim
 if executable('ag')
-    let g:ackprg = 'ag -S --nogroup --column --ignore node_modules --ignore "./public/*" --ignore "./vendor/*" --ignore tags --vimgrep'
+    let g:ackprg = 'ag -S --nogroup --column --ignore node_modules --ignore "public/*" --ignore "vendor/*" --ignore tags --vimgrep'
 endif
 
 " set grepprg=ag                                                  "We want to use Ag for the search.
