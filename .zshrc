@@ -56,7 +56,7 @@ export PATH="/usr/local/php5/bin:/Library/Frameworks/Python.framework/Versions/3
 export PATH=~/.composer/vendor/bin:$PATH
 export PATH=./node_modules/.bin:$PATH
 export PATH="$PATH:$HOME/.rvm/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin" # Add RVM to PATH for scripting
-export TERM=xterm-256color-italic
+# export TERM=xterm-256color-italic
 
 export PATH=/Users/Timon/.local/bin/luna-studio:$PATH
 export PATH="$HOME/.cargo/bin:$PATH"
