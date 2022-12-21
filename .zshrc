@@ -52,7 +52,7 @@ SAVEHIST=100000
 HISTFILE=~/.zsh_history
 export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help"
 
-export PATH="/usr/local/php5/bin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:~/.composer/vendor/bin:/opt/local/bin:/opt/X11/bin"
+export PATH="$HOME/.local/bin:/usr/local/php5/bin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:~/.composer/vendor/bin:/opt/local/bin:/opt/X11/bin"
 export PATH=~/.composer/vendor/bin:$PATH
 export PATH=./node_modules/.bin:$PATH
 export PATH="$PATH:$HOME/.rvm/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin" # Add RVM to PATH for scripting
