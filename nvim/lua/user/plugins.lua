@@ -26,11 +26,11 @@ local ensure_packer = function()
   -- Packer can manage itself.
   use('wbthomason/packer.nvim')
   
--- One Dark theme.
+-- Theme.
 use({
-  'jessarcher/onedark.nvim',
+  'shaunsingh/nord.nvim',
   config = function()
-    vim.cmd('colorscheme onedark')
+    vim.cmd('colorscheme nord')
 
     vim.api.nvim_set_hl(0, 'FloatBorder', {
       fg = vim.api.nvim_get_hl_by_name('NormalFloat', true).background,
@@ -183,7 +183,7 @@ use({
 use({
   'akinsho/bufferline.nvim',
   requires = 'kyazdani42/nvim-web-devicons',
-  after = 'onedark.nvim',
+  after = 'nord.nvim',
   config = function()
     require('user/plugins/bufferline')
   end,
@@ -192,6 +192,7 @@ use({
 -- Display indentation lines.
 use({
   'lukas-reineke/indent-blankline.nvim',
+  after = 'nord.nvim',
   config = function()
     require('user/plugins/indent-blankline')
   end,
