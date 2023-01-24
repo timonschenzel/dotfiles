@@ -192,11 +192,23 @@ use({
 -- Display indentation lines.
 use({
   'lukas-reineke/indent-blankline.nvim',
+  requires = 'nvim-treesitter/nvim-treesitter',
   after = 'nord.nvim',
   config = function()
     require('user/plugins/indent-blankline')
   end,
 })
+
+-- LSP
+use('neovim/nvim-lspconfig')
+use('jose-elias-alvarez/null-ls.nvim')
+-- Autocompletion
+use('hrsh7th/nvim-cmp')
+use('hrsh7th/cmp-nvim-lsp')
+use('L3MON4D3/LuaSnip')
+use('saadparwaiz1/cmp_luasnip')
+use('onsails/lspkind-nvim')
+require('user/plugins/lsp')
 
 -- Add a dashboard.
 use({
@@ -206,15 +218,15 @@ use({
   end
 })
 
-  -- Automatically set up your configuration after cloning packer.nvim
-  -- Put this at the end after all plugins
-  if packer_bootstrap then
-      require('packer').sync()
-  end
+-- Automatically set up your configuration after cloning packer.nvim
+-- Put this at the end after all plugins
+if packer_bootstrap then
+    require('packer').sync()
+end
   
-  vim.cmd([[
-    augroup packer_user_config
+vim.cmd([[
+  augroup packer_user_config
       autocmd!
       autocmd BufWritePost plugins.lua source <afile>
     augroup end
-  ]])
+]])
