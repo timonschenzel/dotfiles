@@ -1,32 +1,32 @@
 local ensure_packer = function()
-    local fn = vim.fn
-    local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-    if fn.empty(fn.glob(install_path)) > 0 then
-      fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-      vim.cmd [[packadd packer.nvim]]
-      return true
-    end
-    return false
+  local fn = vim.fn
+  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    vim.cmd [[packadd packer.nvim]]
+    return true
   end
-  
-  local packer_bootstrap = ensure_packer()
-  
-  require('packer').reset()
-  require('packer').init({
-    compile_path = vim.fn.stdpath('data')..'/site/plugin/packer_compiled.lua',
-    display = {
-      open_fn = function()
-        return require('packer.util').float({ border = 'solid' })
-      end,
-    },
-  })
-  
-  local use = require('packer').use
-  
-  -- Packer can manage itself.
-  use('wbthomason/packer.nvim')
-  
--- Theme.
+  return false
+end
+
+local packer_bootstrap = ensure_packer()
+
+require('packer').reset()
+require('packer').init({
+  compile_path = vim.fn.stdpath('data')..'/site/plugin/packer_compiled.lua',
+  display = {
+    open_fn = function()
+      return require('packer.util').float({ border = 'solid' })
+    end,
+  },
+})
+
+local use = require('packer').use
+
+-- Packer can manage itself.
+use('wbthomason/packer.nvim')
+
+-- Nord theme.
 use({
   'shaunsingh/nord.nvim',
   config = function()
@@ -54,9 +54,9 @@ use({
   end,
 })
 
-  -- Commenting support.
-  use('tpope/vim-commentary')
-  
+-- Commenting support.
+use('tpope/vim-commentary')
+
 -- Add, change, and delete surrounding text.
 use('tpope/vim-surround')
 
@@ -199,23 +199,59 @@ use({
   end,
 })
 
--- LSP
-use('neovim/nvim-lspconfig')
-use('jose-elias-alvarez/null-ls.nvim')
--- Autocompletion
-use('hrsh7th/nvim-cmp')
-use('hrsh7th/cmp-nvim-lsp')
-use('L3MON4D3/LuaSnip')
-use('saadparwaiz1/cmp_luasnip')
-use('onsails/lspkind-nvim')
-require('user/plugins/lsp')
-
 -- Add a dashboard.
 use({
   'glepnir/dashboard-nvim',
+  event = 'VimEnter',
   config = function()
     require('user/plugins/dashboard-nvim')
   end
+})
+
+-- Git integration.
+use({
+  'lewis6991/gitsigns.nvim',
+  config = function()
+    require('gitsigns').setup()
+    vim.keymap.set('n', ']h', ':Gitsigns next_hunk<CR>')
+    vim.keymap.set('n', '[h', ':Gitsigns prev_hunk<CR>')
+    vim.keymap.set('n', 'gs', ':Gitsigns stage_hunk<CR>')
+    vim.keymap.set('n', 'gS', ':Gitsigns undo_stage_hunk<CR>')
+    vim.keymap.set('n', 'gp', ':Gitsigns preview_hunk<CR>')
+    vim.keymap.set('n', 'gb', ':Gitsigns blame_line<CR>')
+  end,
+})
+
+-- Git commands.
+use({
+  'tpope/vim-fugitive',
+  requires = 'tpope/vim-rhubarb',
+})
+
+--- Floating terminal.
+use({
+  'voldikss/vim-floaterm',
+  config = function()
+    vim.g.floaterm_wintype = 'split'
+    vim.g.floaterm_height = 0.4
+    vim.keymap.set('n', '<Leader>,', ':FloatermToggle<CR>')
+    vim.keymap.set('t', '<Leader>,', '<C-\\><C-n>:FloatermToggle<CR>')
+  end
+})
+
+-- Improved syntax highlighting
+use({
+  'nvim-treesitter/nvim-treesitter',
+  run = function()
+    require('nvim-treesitter.install').update({ with_sync = true })
+  end,
+  requires = {
+    'JoosepAlviste/nvim-ts-context-commentstring',
+    'nvim-treesitter/nvim-treesitter-textobjects',
+  },
+  config = function()
+    require('user/plugins/treesitter')
+  end,
 })
 
 -- Automatically set up your configuration after cloning packer.nvim
@@ -223,10 +259,10 @@ use({
 if packer_bootstrap then
     require('packer').sync()
 end
-  
+
 vim.cmd([[
   augroup packer_user_config
-      autocmd!
-      autocmd BufWritePost plugins.lua source <afile>
-    augroup end
+    autocmd!
+    autocmd BufWritePost plugins.lua source <afile>
+  augroup end
 ]])

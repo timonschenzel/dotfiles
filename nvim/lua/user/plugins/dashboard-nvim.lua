@@ -1,37 +1,32 @@
-local dashboard = require('dashboard')
-
-dashboard.custom_header = {
-  '',
-  '',
-  '',
-  '',
-  '',
-  '⠰⣶⡄      ⣶⣶  ⣶⡆               ',
-  ' ⣿⣿     ⢠⣿⠇  ⠉                ',
-  ' ⠈⣿⡆    ⣿⡿   ⣶⡆  ⣶⣆⣴⣿⣿⣷⣄⢀⣶⣿⣿⣶ ',
-  '  ⢻⣿   ⢰⣿⠁   ⣿⡇  ⣿⡿   ⠹⣿⡟   ⢻⣿',
-  '   ⣿⣇  ⣿⡏    ⣿⡇  ⣿⡇    ⣿⡇   ⢸⣿',
-  '   ⠸⣿ ⣸⣿     ⣿⡇  ⣿⡇    ⣿⡇   ⢸⣿',
-  '    ⢿⣷⣿⠃     ⣿⡇  ⣿⡇    ⣿⡇   ⢸⣿',
-  '    ⠈⣿⡿      ⣿⡇  ⣿⡇    ⣿⡇   ⢸⣿',
-  '',
-  '',
-  '',
-  '',
-  '',
-}
-
-dashboard.custom_center = {
-  { icon = '  ', desc = 'New file                       ', action = 'enew' },
-  { icon = '  ', shortcut = 'SPC p', desc = 'Find file                 ', action = 'Telescope find_files' },
-  { icon = '  ', shortcut = 'SPC e', desc = 'Recent files              ', action = 'Telescope oldfiles' },
-  { icon = '  ', shortcut = 'SPC g', desc = 'Find Word                 ', action = 'Telescope live_grep' },
-  { icon = '  ', shortcut = 'SPC t', desc = 'Find Symbol               ', action = 'Telescope lsp_workspace_symbols' },
-}
-
-dashboard.custom_footer = { '' }
-
-vim.api.nvim_set_hl(0, 'DashboardHeader', { fg = '#6272a4' })
-vim.api.nvim_set_hl(0, 'DashboardCenter', { fg = '#f8f8f2' })
-vim.api.nvim_set_hl(0, 'DashboardShortcut', { fg = '#bd93f9' })
-vim.api.nvim_set_hl(0, 'DashboardFooter', { fg = '#6272a4' })
+require('dashboard').setup({
+  theme = 'doom',
+  config = {
+    header = {
+      '',
+      '',
+      '',
+      '',
+      '',
+      '⠰⣶⡄      ⣶⣶  ⣶⡆               ',
+      ' ⣿⣿     ⢠⣿⠇  ⠉                ',
+      ' ⠈⣿⡆    ⣿⡿   ⣶⡆  ⣶⣆⣴⣿⣿⣷⣄⢀⣶⣿⣿⣶ ',
+      '  ⢻⣿   ⢰⣿⠁   ⣿⡇  ⣿⡿   ⠹⣿⡟   ⢻⣿',
+      '   ⣿⣇  ⣿⡏    ⣿⡇  ⣿⡇    ⣿⡇   ⢸⣿',
+      '   ⠸⣿ ⣸⣿     ⣿⡇  ⣿⡇    ⣿⡇   ⢸⣿',
+      '    ⢿⣷⣿⠃     ⣿⡇  ⣿⡇    ⣿⡇   ⢸⣿',
+      '    ⠈⣿⡿      ⣿⡇  ⣿⡇    ⣿⡇   ⢸⣿',
+      '',
+      '',
+      '',
+      '',
+      '',
+    },
+    center = {
+      { keymap = 'SPC p', icon = '  ', icon_hl = 'Title', desc = 'Find File', desc_hl = 'String', key = 'f', key_hl = 'Number', action = 'Telescope find_files' },
+      { keymap = 'SPC e', icon = '  ', icon_hl = 'Title', desc = 'Recent Files', desc_hl = 'String', key = 'r', key_hl = 'Number', action = 'Telescope oldfiles' },
+      { keymap = 'SPC g', icon = '  ', icon_hl = 'Title', desc = 'Find Word', desc_hl = 'String', key = 'w', key_hl = 'Number', action = 'Telescope live_grep' },
+      { keymap = 'SPC n', icon = '  ', icon_hl = 'Title', desc = 'New File', desc_hl = 'String', key = 'n', key_hl = 'Number', action = 'enew' },
+    },
+    footer = {}
+  }
+})

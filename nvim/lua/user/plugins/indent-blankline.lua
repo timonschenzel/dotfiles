@@ -10,28 +10,28 @@ vim.cmd [[highlight IndentBlanklineIndent6 guifg=#415161 gui=nocombine]]
 vim.opt.list = true
 
 require('indent_blankline').setup({
-    space_char_blankline = " ",
-    show_current_context = true,
-    show_current_context_start = true,
-    char_highlight_list = {
-        "IndentBlanklineIndent1",
-        "IndentBlanklineIndent2",
-        "IndentBlanklineIndent3",
-        "IndentBlanklineIndent4",
-        "IndentBlanklineIndent5",
-        "IndentBlanklineIndent6",
-    },
-    filetype_exclude = {
-      'help',
-      'terminal',
-      'dashboard',
-      'packer',
-      'lspinfo',
-      'TelescopePrompt',
-      'TelescopeResults',
-    },
-    buftype_exclude = {
-      'terminal',
-      'NvimTree',
-    },
-  })
+  space_char_blankline = " ",
+  show_current_context = true,
+  show_current_context_start = true,
+  char_highlight_list = {
+      "IndentBlanklineIndent1",
+      "IndentBlanklineIndent2",
+      "IndentBlanklineIndent3",
+      "IndentBlanklineIndent4",
+      "IndentBlanklineIndent5",
+      "IndentBlanklineIndent6",
+  },
+  filetype_exclude = {
+    'help',
+    'terminal',
+    'dashboard',
+    'packer',
+    'lspinfo',
+    'TelescopePrompt',
+    'TelescopeResults',
+  },
+  buftype_exclude = {
+    'terminal',
+    'NvimTree',
+  },
+})

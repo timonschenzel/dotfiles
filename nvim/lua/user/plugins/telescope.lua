@@ -12,12 +12,10 @@ vim.cmd([[
 require('telescope').setup({
   defaults = {
     path_display = { truncate = 1 },
-    prompt_prefix = '   ',
-    selection_caret = '  ',
     layout_config = {
-      prompt_position = 'top',
+      prompt_position = 'bottom',
     },
-    sorting_strategy = 'ascending',
+    sorting_strategy = 'descending',
     mappings = {
       i = {
         ['<esc>'] = actions.close,
@@ -29,19 +27,28 @@ require('telescope').setup({
   },
   pickers = {
     find_files = {
+      theme = 'ivy',
+      previewer = false,
       hidden = true,
     },
     buffers = {
+      theme = 'ivy',
       previewer = false,
       layout_config = {
         width = 80,
       },
     },
     oldfiles = {
+      theme = 'ivy',
+      previewer = false,
       prompt_title = 'History',
     },
     lsp_references = {
+      theme = 'ivy',
       previewer = false,
+    },
+    live_grep = {
+      theme = 'ivy',
     },
   },
 })
