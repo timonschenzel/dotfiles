@@ -62,3 +62,4 @@ vim.keymap.set('n', '<leader>b', [[<cmd>lua require('telescope.builtin').buffers
 vim.keymap.set('n', '<leader>g', [[<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>]])
 vim.keymap.set('n', '<leader>e', [[<cmd>lua require('telescope.builtin').oldfiles()<CR>]])
 vim.keymap.set('n', '<leader>l', [[<cmd>lua require('telescope.builtin').lsp_document_symbols({ symbols = {"module", "function", "method", "interface", "constructor"} })<CR>]])
+vim.keymap.set('n', '<leader>t', [[<cmd>lua require('telescope.builtin').lsp_dynamic_workspace_symbols({ symbols = {"module", "function", "method", "interface", "constructor"} })<CR>]])
